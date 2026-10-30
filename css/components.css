@@ -258,9 +258,15 @@
   width: 48px;
   height: 77px;
   pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
 }
 .daily-check__days::before { left: 0;  background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0)); }
 .daily-check__days::after  { right: 0; background: linear-gradient(270deg, #fff, rgba(255, 255, 255, 0)); }
+
+/* 스크롤 위치에 따라 마스크 표시: 왼쪽에 더 있으면 왼쪽, 오른쪽에 더 있으면 오른쪽 */
+.daily-check__days.has-more-left::before,
+.daily-check__days.has-more-right::after { opacity: 1; }
 
 .daily-check__scroll {
   overflow-x: auto;

@@ -87,6 +87,28 @@
     return { show: show, hide: function () { clearTimeout(hideTimer); hide(current); } };
   })();
 
+  /* ---------- 가로 스크롤 양끝 마스크 ----------
+   * 스크롤 영역(scrollEl)의 위치에 따라 wrapEl 에 클래스 토글
+   *   has-more-left  : 왼쪽에 가려진 내용이 있음 (처음이 아님)
+   *   has-more-right : 오른쪽에 가려진 내용이 있음 (끝이 아님)
+   */
+  function bindEdgeFade(scrollEl, wrapEl) {
+    if (!scrollEl || !wrapEl) return function () {};
+    var EPS = 2;
+    var raf = null;
+    function update() {
+      raf = null;
+      var max = scrollEl.scrollWidth - scrollEl.clientWidth;
+      wrapEl.classList.toggle('has-more-left', scrollEl.scrollLeft > EPS);
+      wrapEl.classList.toggle('has-more-right', scrollEl.scrollLeft < max - EPS);
+    }
+    function schedule() { if (!raf) raf = requestAnimationFrame(update); }
+    scrollEl.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    update();
+    return update;
+  }
+
   /* ---------- 스크롤 위치 감지: 맨 위가 아니면 html.is-scrolled ---------- */
   (function watchScrollTop() {
     var root = document.documentElement;
@@ -113,6 +135,7 @@
     getParam: getParam,
     wait: wait,
     navigate: navigate,
+    bindEdgeFade: bindEdgeFade,
     Toast: Toast
   };
 })(window);

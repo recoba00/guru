@@ -79,6 +79,13 @@
     }
     var next = core.qs('[data-daily-scroll]', wrap);
     if (next) next.scrollLeft = left;
+    bindDailyFade();
+  }
+
+  /* 출석 일차 가로 스크롤 양끝 마스크 (처음엔 왼쪽 없음 / 끝까지 가면 오른쪽 없음) */
+  function bindDailyFade() {
+    var scroll = core.qs('[data-daily-scroll]', root);
+    if (scroll) core.bindEdgeFade(scroll, scroll.parentNode);
   }
 
   function afterRender() {
@@ -96,6 +103,7 @@
     if (today && today.offsetLeft + today.offsetWidth > scroll.clientWidth) {
       scroll.scrollLeft = today.offsetLeft - 64 * 2;
     }
+    bindDailyFade();
   }
 
   /* ---------- data ---------- */
