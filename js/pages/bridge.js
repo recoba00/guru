@@ -60,7 +60,7 @@
 
     root.classList.add('has-bottom-cta');
     root.innerHTML = '' +
-      ui.Header({ title: title, showClose: true }) +
+      ui.Header({ title: title }) +
       '<main class="bridge">' +
         ui.GameHero(d.data) +
         missionsHtml +
@@ -121,9 +121,6 @@
       case 'back':
         if (window.history.length > 1) window.history.back();
         else core.navigate(HOME_URL);
-        break;
-      case 'close':
-        core.navigate(HOME_URL, { replace: true });
         break;
       case 'retry-detail':
         loadDetail();
