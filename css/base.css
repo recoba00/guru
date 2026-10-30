@@ -1,0 +1,91 @@
+@charset "UTF-8";
+
+/* =========================================================
+   Base / Reset
+   ========================================================= */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-brand);
+  color: var(--text-strong);
+  background: var(--bg-lower);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overflow-wrap: anywhere;   /* Figma 와 같은 줄바꿈(음절 단위). 단어 단위가 필요하면 word-break: keep-all */
+}
+
+h1, h2, h3, p, ul, ol { margin: 0; padding: 0; }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+
+button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+button:disabled { cursor: default; }
+
+:focus-visible {
+  outline: 2px solid var(--brand-playb);
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* =========================================================
+   App shell — 모바일 기준, 넓은 화면에서는 가운데 정렬
+   ========================================================= */
+.app {
+  position: relative;
+  width: 100%;
+  max-width: var(--app-max-width);
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding-top: env(safe-area-inset-top, 0px);
+  background: var(--bg-lower);
+}
+
+/* 모바일(터치 기기·좁은 화면)에서는 스크롤바 숨김 — 스크롤은 그대로 동작 */
+@media (max-width: 480px), (hover: none) and (pointer: coarse) {
+  html,
+  body,
+  .app * {
+    scrollbar-width: none;            /* Firefox */
+    -ms-overflow-style: none;         /* 구 Edge */
+  }
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar,
+  .app *::-webkit-scrollbar {
+    display: none;                    /* Chrome · Safari · 삼성인터넷 */
+    width: 0;
+    height: 0;
+  }
+}
+
+@media (min-width: 481px) {
+  html, body { background: #e5e7eb; }
+  .app { box-shadow: 0 0 0 1px rgba(17, 24, 39, 0.04); }
+}

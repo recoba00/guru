@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>플레이비 라이트 · 화면/상태 목록</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/static/pretendard-dynamic-subset.css">
+  <style>
+    :root {
+      --bg: #e9ecf1;
+      --surface: #ffffff;
+      --text: #111827;
+      --muted: rgba(31, 41, 55, 0.6);
+      --brand: #2cb6d2;
+      --frame-w: 360px;
+      --frame-h: 780px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 32px 16px 64px;
+      font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Malgun Gothic", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    header.page { max-width: 1600px; margin: 0 auto 32px; }
+    header.page h1 { margin: 0 0 8px; font-size: 24px; font-weight: 700; }
+    header.page p { margin: 0; font-size: 14px; line-height: 1.6; color: var(--muted); }
+    header.page code { padding: 1px 6px; border-radius: 6px; background: #fff; font-size: 13px; }
+
+    section.group { max-width: 1600px; margin: 0 auto 48px; }
+    section.group h2 { margin: 0 0 16px; font-size: 18px; font-weight: 700; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(var(--frame-w), 1fr));
+      gap: 32px 24px;
+    }
+    .case { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .case__meta { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; width: var(--frame-w); max-width: 100%; }
+    .case__name { font-size: 14px; font-weight: 600; }
+    .case__link { flex-shrink: 0; font-size: 12px; font-weight: 600; color: #1a9bb5; text-decoration: none; }
+    .case__link:hover { text-decoration: underline; }
+    .case iframe {
+      width: var(--frame-w);
+      max-width: 100%;
+      height: var(--frame-h);
+      border: 0;
+      border-radius: 20px;
+      background: #f3f4f6;
+      box-shadow: 0 1px 2px rgba(17, 24, 39, 0.06), 0 8px 24px rgba(17, 24, 39, 0.08);
+    }
+  </style>
+</head>
+<body>
+  <header class="page">
+    <h1>플레이비 라이트 · 화면/상태 목록</h1>
+    <p>Figma ‘플레이비 라이트’ 섹션과 ‘상태별 케이스’를 한 번에 확인하는 페이지예요. 각 화면은 실제로 동작하고(클릭·재시도·출석·이동), 상태는 URL 의 <code>?state=</code> 값으로 재현해요.<br>
+       토스트 케이스는 확인하기 쉽게 <code>&amp;hold=1</code> 로 토스트를 띄워 둔 상태예요.</p>
+  </header>
+
+  <section class="group">
+    <h2>플레이비 메인</h2>
+    <div class="grid" data-cases='[
+      ["카드 UI · 게임설명 등록함", "home.html"],
+      ["카드 UI · 게임설명 등록 안함", "home.html?state=no-desc"]
+    ]'></div>
+  </section>
+
+  <section class="group">
+    <h2>홈 · 상태별 케이스</h2>
+    <div class="grid" data-cases='[
+      ["출석 완료 (당일)", "home.html?state=attended"],
+      ["게임 목록 로딩 (스켈레톤)", "home.html?state=loading"],
+      ["게임 목록 조회 실패", "home.html?state=error"],
+      ["게임 목록 없음", "home.html?state=empty"],
+      ["토스트 (광고 로드 실패)", "home.html?state=toast-ad&hold=1"],
+      ["토스트 (푸터 링크 열기 실패)", "home.html?state=toast-link&hold=1"],
+      ["전면광고 (출석하고 NP 받기 탭 → 보상 전)", "home.html?state=ad"],
+      ["출석체크 완료 (전면광고 닫은 뒤)", "attendance-complete.html"]
+    ]'></div>
+  </section>
+
+  <section class="group">
+    <h2>게임 진입 브릿지</h2>
+    <div class="grid" data-cases='[
+      ["게임 진입 브릿지", "bridge.html"],
+      ["로딩", "bridge.html?state=loading"],
+      ["게임 정보 조회 실패", "bridge.html?state=error"],
+      ["미션 조회 실패", "bridge.html?state=mission-error"],
+      ["토스트 (게임 실행 실패)", "bridge.html?state=toast-launch&hold=1"]
+    ]'></div>
+  </section>
+
+  <section class="group">
+    <h2>약관</h2>
+    <div class="grid" data-cases='[
+      ["이용약관", "terms.html"],
+      ["개인정보 처리방침", "privacy.html"]
+    ]'></div>
+  </section>
+
+  <script>
+    document.querySelectorAll('[data-cases]').forEach(function (grid) {
+      JSON.parse(grid.getAttribute('data-cases')).forEach(function (c) {
+        var el = document.createElement('div');
+        el.className = 'case';
+        el.innerHTML =
+          '<div class="case__meta"><span class="case__name"></span><a class="case__link" target="_blank" rel="noopener">새 창으로 열기 ↗</a></div>' +
+          '<iframe loading="lazy"></iframe>';
+        el.querySelector('.case__name').textContent = c[0];
+        el.querySelector('.case__link').href = c[1];
+        el.querySelector('iframe').src = c[1];
+        el.querySelector('iframe').title = c[0];
+        grid.appendChild(el);
+      });
+    });
+  </script>
+</body>
+</html>

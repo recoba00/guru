@@ -1,0 +1,76 @@
+@charset "UTF-8";
+
+/* =========================================================
+   Design Tokens — Figma 변수 기준 (플레이비 라이트)
+   React 이식 시: 그대로 전역 CSS 로 쓰거나 theme 객체로 옮기면 됩니다.
+   ========================================================= */
+:root {
+  /* ---------- Color : brand ---------- */
+  --brand-playb: #2cb6d2;                         /* brand/regular/playb, fill/brand-playb */
+  --text-brand-playb: #1a9bb5;                    /* semantic/text/brand-playb, text/playb */
+  --fill-brand-weak-playb: rgba(44, 182, 210, 0.2);
+
+  /* ---------- Color : background / fill ---------- */
+  --bg-default: #ffffff;                          /* semantic/background/default */
+  --bg-lower: #f3f4f6;                            /* semantic/background/lower */
+  --fill-neutral: #374151;                        /* semantic/fill/neutral (토스트) */
+  --fill-neutral-weak: rgba(55, 65, 81, 0.05);    /* semantic/fill/neutral-weak */
+  --border-thick: #f3f4f6;                        /* semantic/border/thick */
+  --alpha-black-10: rgba(0, 0, 0, 0.1);
+  --alpha-black-50: rgba(0, 0, 0, 0.5);
+  --alpha-black-60: rgba(0, 0, 0, 0.6);
+  --gray-300: #d1d5db;
+  --blue-700: #1d4ed8;
+  --red-500: #ef4444;
+
+  /* ---------- Color : text ---------- */
+  --text-strong: #111827;
+  --text-primary: rgba(17, 24, 39, 0.9);
+  --text-secondary: rgba(31, 41, 55, 0.7);
+  --text-tertiary: rgba(31, 41, 55, 0.6);
+  --text-quaternary: rgba(31, 41, 55, 0.5);
+  --text-strong-inverse: #ffffff;
+  --text-primary-inverse: rgba(255, 255, 255, 0.9);
+  --text-on-fill-brand: #ffffff;
+
+  /* ---------- Typography ---------- */
+  --font-brand: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --fs-xs: 12px;
+  --fs-sm: 14px;
+  --fs-md: 15px;
+  --fs-base: 16px;
+  --fs-lg: 18px;
+  --fs-xl: 20px;
+  --fs-2xl: 24px;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* ---------- Spacing ---------- */
+  --sp-2px: 2px;
+  --sp-1: 4px;
+  --sp-6px: 6px;
+  --sp-2: 8px;
+  --sp-10px: 10px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+
+  /* ---------- Radius ---------- */
+  --radius-sm: 2px;
+  --radius-xs: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-3xl: 24px;
+  --radius-full: 9999px;
+
+  /* ---------- Layout ---------- */
+  --header-height: 56px;
+  --page-gutter: 16px;
+  --app-max-width: 480px;                         /* 태블릿·PC 에서는 이 폭으로 가운데 정렬 */
+  --toast-top: 88px;                              /* 토스트 위치 (Figma: top 88px) */
+}
