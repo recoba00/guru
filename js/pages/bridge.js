@@ -136,6 +136,7 @@
 
   /* ---------- init ---------- */
   loadDetail().then(function () {
+    core.restoreScroll();   // 화면을 다 그린 뒤 스크롤 위치 결정 (새로고침 = 맨 위)
     if (api.state === 'toast-launch' && state.detail.status === 'success') launch();
   });
 })(window, document);

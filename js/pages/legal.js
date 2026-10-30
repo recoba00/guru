@@ -17,4 +17,6 @@
     }
     if (action === 'home') core.navigate(HOME_URL);
   });
+
+  core.restoreScroll();   // 새로고침 = 맨 위, 뒤로 가기 = 이전 위치
 })(window);

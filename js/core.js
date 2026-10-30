@@ -127,6 +127,29 @@
     update();
   })();
 
+  /* ---------- 스크롤 위치 복원 ----------
+   * 브라우저 기본 복원은 새로고침(당겨서 새로고침 포함) 때도 이전 위치로 되돌려서
+   * 배너가 헤더 밑에 걸친 채로 열리거나, 비동기로 그려지는 화면에선 엉뚱한 위치에 멈춤.
+   *  - 새로고침·일반 진입: 항상 맨 위에서 시작
+   *  - 뒤로/앞으로 가기: 화면을 다 그린 뒤 restoreScroll() 로 이전 위치 복원
+   */
+  var SCROLL_KEY = 'pb:scroll:' + window.location.pathname + window.location.search;
+  var navEntry = window.performance && performance.getEntriesByType
+    ? performance.getEntriesByType('navigation')[0] : null;
+  var isBackForward = !!navEntry && navEntry.type === 'back_forward';
+
+  if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual';
+  window.addEventListener('pagehide', function () {
+    try { window.sessionStorage.setItem(SCROLL_KEY, String(Math.round(window.scrollY))); } catch (e) { /* 저장 불가 환경 무시 */ }
+  });
+
+  function restoreScroll() {
+    if (!isBackForward) return;          // 새로고침·일반 진입은 이미 맨 위 (로딩 중 사용자가 스크롤했으면 그대로 둠)
+    var y = 0;
+    try { y = parseInt(window.sessionStorage.getItem(SCROLL_KEY), 10) || 0; } catch (e) { y = 0; }
+    window.scrollTo(0, y);
+  }
+
   window.PB = window.PB || {};
   window.PB.core = {
     escapeHtml: escapeHtml,
@@ -136,6 +159,7 @@
     wait: wait,
     navigate: navigate,
     bindEdgeFade: bindEdgeFade,
+    restoreScroll: restoreScroll,
     Toast: Toast
   };
 })(window);

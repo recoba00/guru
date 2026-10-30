@@ -10,6 +10,8 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  /* 고정 헤더 높이만큼 여백: 브라우저가 요소를 화면에 맞춰 스크롤할 때 헤더 밑으로 숨지 않게 */
+  scroll-padding-top: calc(var(--header-height) + env(safe-area-inset-top, 0px));
 }
 
 body {

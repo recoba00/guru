@@ -179,6 +179,7 @@
     state.attendance = res[1];
     render();
     loadGames().then(function () {
+      core.restoreScroll();   // 화면을 다 그린 뒤 스크롤 위치 결정 (새로고침 = 맨 위)
       // 토스트 상태 미리보기: 실제 흐름(버튼 탭)을 그대로 재현
       if (api.state === 'toast-ad' || api.state === 'ad') attend();   // ad: 전면광고 미리보기
       if (api.state === 'toast-link') openLink('terms.html');
