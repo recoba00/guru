@@ -28,7 +28,7 @@
       id: 'game-' + i,
       title: '게임타이틀 최대 한 줄까지',
       description: withDesc ? '게임소개글 공백포함 12자' : '',
-      thumbnail: IMG + 'mock-thumb-hanipcut.png',
+      thumbnail: IMG + 'mock-thumb-hanipcut.webp',
       missions: ['미션내용이 출력되는 영역이예요.', '미션내용이 출력되는 영역이예요.']
     };
   }
@@ -50,7 +50,7 @@
     summary: '정해진 시간안에 그림을 정확하게 잘라보세요!',
     genre: '캐주얼',
     banner: IMG + 'mock-banner-hanipcut.webp',
-    thumbnail: IMG + 'mock-thumb-hanipcut.png'
+    thumbnail: IMG + 'mock-thumb-hanipcut.webp'
   };
 
   var MISSIONS = [
