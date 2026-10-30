@@ -28,7 +28,7 @@
   function Header(props) {
     var p = props || {};
     return '' +
-      '<header class="header' + (p.showClose ? ' header--has-close' : '') + '">' +
+      '<header class="header' + (p.showClose ? ' header--has-close' : '') + (p.contentWidth ? ' header--content' : '') + '">' +
         '<div class="header__inner">' +
           (p.showBack === false ? '' :
             '<button type="button" class="header__btn" data-action="back" aria-label="뒤로 가기">' +

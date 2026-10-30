@@ -36,14 +36,14 @@
 
     // 로딩: 헤더 + 스피너
     if (d.status === 'loading') {
-      root.innerHTML = ui.Header({ title: title }) +
+      root.innerHTML = ui.Header({ title: title, contentWidth: true }) +
         '<main class="bridge__loading" aria-busy="true">' + ui.Spinner() + '</main>';
       return;
     }
 
     // 게임 정보 조회 실패: 헤더 + 상태 안내 (CTA 없음)
     if (d.status === 'error') {
-      root.innerHTML = ui.Header({ title: title }) +
+      root.innerHTML = ui.Header({ title: title, contentWidth: true }) +
         '<main class="bridge__state">' +
           ui.StatusNotice({ message: '게임 정보를 불러오지 못했어요', actionLabel: '새로고침', action: 'retry-detail' }) +
         '</main>';
@@ -60,7 +60,7 @@
 
     root.classList.add('has-bottom-cta');
     root.innerHTML = '' +
-      ui.Header({ title: title }) +
+      ui.Header({ title: title, contentWidth: true }) +
       '<main class="bridge">' +
         ui.GameHero(d.data) +
         missionsHtml +

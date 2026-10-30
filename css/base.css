@@ -71,7 +71,7 @@ button:disabled { cursor: default; }
 }
 
 /* 모바일(터치 기기·좁은 화면)에서는 스크롤바 숨김 — 스크롤은 그대로 동작 */
-@media (max-width: 480px), (hover: none) and (pointer: coarse) {
+@media (max-width: 1024px), (hover: none) and (pointer: coarse) {
   html,
   body,
   .app * {
@@ -87,7 +87,8 @@ button:disabled { cursor: default; }
   }
 }
 
-@media (min-width: 481px) {
+/* PC(태블릿 세로보다 넓은 화면): 앱 영역 바깥은 회색 */
+@media (min-width: 1025px) {
   html, body { background: #e5e7eb; }
   .app { box-shadow: 0 0 0 1px rgba(17, 24, 39, 0.04); }
 }

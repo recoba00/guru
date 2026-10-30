@@ -439,3 +439,30 @@
   line-height: 24px;
   color: #fff;
 }
+
+/* =========================================================
+   태블릿 (600px ~ 1024px)
+   ========================================================= */
+@media (min-width: 600px) {
+  .home { gap: var(--sp-10); }
+  .home__top { padding-top: var(--sp-4); }
+
+  /* 브릿지·약관: 읽기 영역은 최대 720px 가운데 정렬 */
+  .bridge,
+  .legal {
+    width: 100%;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+  }
+  .bridge { gap: var(--sp-4); }
+  .bridge__state .status-notice { max-width: var(--content-max-width); }
+
+  /* 출석체크 완료: 내용·버튼 최대 560px */
+  .att-done__text,
+  .att-done__stamps { max-width: 560px; }
+  .att-done__title { font-size: 28px; line-height: 36px; }
+  .btn-confirm {
+    max-width: 560px;
+    margin: 0 auto;
+  }
+}

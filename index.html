@@ -30,6 +30,12 @@
     header.page p { margin: 0; font-size: 14px; line-height: 1.6; color: var(--muted); }
     header.page code { padding: 1px 6px; border-radius: 6px; background: #fff; font-size: 13px; }
 
+    /* 미리보기 기기 전환 */
+    html[data-device="tablet"] { --frame-w: 768px; --frame-h: 1024px; }
+    .device-switch { display: inline-flex; gap: 4px; margin-top: 16px; padding: 4px; border-radius: 999px; background: #fff; }
+    .device-switch button { padding: 6px 14px; border: 0; border-radius: 999px; background: none; font: inherit; font-size: 13px; font-weight: 600; color: var(--muted); cursor: pointer; }
+    .device-switch button[aria-pressed="true"] { background: var(--brand); color: #fff; }
+
     section.group { max-width: 1600px; margin: 0 auto 48px; }
     section.group h2 { margin: 0 0 16px; font-size: 18px; font-weight: 700; }
 
@@ -59,6 +65,10 @@
     <h1>플레이비 라이트 · 화면/상태 목록</h1>
     <p>Figma ‘플레이비 라이트’ 섹션과 ‘상태별 케이스’를 한 번에 확인하는 페이지예요. 각 화면은 실제로 동작하고(클릭·재시도·출석·이동), 상태는 URL 의 <code>?state=</code> 값으로 재현해요.<br>
        토스트 케이스는 확인하기 쉽게 <code>&amp;hold=1</code> 로 토스트를 띄워 둔 상태예요.</p>
+    <div class="device-switch" role="group" aria-label="미리보기 기기">
+      <button type="button" data-device="mobile" aria-pressed="true">모바일 360 × 780</button>
+      <button type="button" data-device="tablet" aria-pressed="false">태블릿 세로 768 × 1024</button>
+    </div>
   </header>
 
   <section class="group">
@@ -103,6 +113,13 @@
   </section>
 
   <script>
+    document.querySelectorAll('.device-switch button').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        document.documentElement.setAttribute('data-device', btn.getAttribute('data-device'));
+        document.querySelectorAll('.device-switch button').forEach(function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
+      });
+    });
+
     document.querySelectorAll('[data-cases]').forEach(function (grid) {
       JSON.parse(grid.getAttribute('data-cases')).forEach(function (c) {
         var el = document.createElement('div');
